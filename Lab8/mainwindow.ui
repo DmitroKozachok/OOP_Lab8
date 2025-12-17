@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Music Player</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">
+QWidget#centralwidget {
+    background-color: #20232a;
+    color: #f0f0f0;
+    font-family: Segoe UI, Arial;
+    font-size: 10pt;
+}
+
+QGroupBox {
+    border: 1px solid #3c4048;
+    border-radius: 6px;
+    margin-top: 18px;
+    padding-top: 10px;
+    background-color: #242730;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 4px;
+    color: #61dafb;
+}
+
+QTabWidget::pane {
+    border: 1px solid #3c4048;
+    border-radius: 6px;
+    background-color: #242730;
+}
+
+QTabBar::tab {
+    background: #2b2f3a;
+    color: #f0f0f0;
+    border: 1px solid #3c4048;
+    padding: 4px 10px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    margin-right: 2px;
+}
+
+QTabBar::tab:selected {
+    background: #3c4048;
+}
+
+QTableWidget {
+    background-color: #282c34;
+    gridline-color: #3c4048;
+    selection-background-color: #3fa7d6;
+    selection-color: #ffffff;
+    alternate-background-color: #323640;
+}
+
+QHeaderView::section {
+    background-color: #3c4048;
+    color: #f0f0f0;
+    padding: 4px;
+    border: none;
+}
+
+QPushButton {
+    background-color: #3fa7d6;
+    color: white;
+    border-radius: 4px;
+    padding: 4px 10px;
+    border: none;
+}
+
+QPushButton:hover {
+    background-color: #4fb7e6;
+}
+
+QPushButton:pressed {
+    background-color: #2f97c6;
+}
+
+QPushButton#playButton {
+    background-color: #4caf50;
+}
+
+QPushButton#playButton:hover {
+    background-color: #5ecf63;
+}
+
+QPushButton#pauseButton {
+    background-color: #ffb300;
+}
+
+QPushButton#pauseButton:hover {
+    background-color: #ffca28;
+}
+
+QSlider::groove:horizontal {
+    height: 6px;
+    background: #3c4048;
+    border-radius: 3px;
+}
+
+QSlider::handle:horizontal {
+    background: #61dafb;
+    width: 14px;
+    margin: -5px 0;
+    border-radius: 7px;
+}
+
+QSlider::sub-page:horizontal {
+    background: #3fa7d6;
+    border-radius: 3px;
+}
+
+QLabel {
+    color: #f0f0f0;
+}
+
+QLabel#currentTrackLabel {
+    font-weight: bold;
+}
+    </string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="topLayout">
+      <item>
+       <widget class="QGroupBox" name="playlistsGroupBox">
+        <property name="title">
+         <string>Playlists</string>
+        </property>
+        <layout class="QVBoxLayout" name="playlistsLayout">
+         <item>
+          <widget class="QTableWidget" name="playlistTable">
+           <property name="columnCount">
+            <number>2</number>
+           </property>
+           <column>
+            <property name="text">
+             <string>Playlist</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Tracks</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="playlistButtonsLayout">
+           <item>
+            <spacer name="playlistButtonsSpacer">
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="addPlaylistButton">
+             <property name="text">
+              <string>Add Playlist</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="removePlaylistButton">
+             <property name="text">
+              <string>Remove</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="libraryGroupBox">
+        <property name="title">
+         <string>Library</string>
+        </property>
+        <layout class="QVBoxLayout" name="libraryLayout">
+         <item>
+          <widget class="QTabWidget" name="libraryTabs">
+           <property name="tabPosition">
+            <enum>QTabWidget::TabPosition::North</enum>
+           </property>
+           <widget class="QWidget" name="tabPlaylistTracks">
+            <attribute name="title">
+             <string>Playlist tracks</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="playlistTracksLayout">
+             <item>
+              <widget class="QLabel" name="playlistTracksLabel">
+               <property name="text">
+                <string>Tracks in selected playlist</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTableWidget" name="playlistTracksTable">
+               <property name="columnCount">
+                <number>3</number>
+               </property>
+               <column>
+                <property name="text">
+                 <string>Title</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Artist</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Duration</string>
+                </property>
+               </column>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="playlistTracksButtonsLayout">
+               <item>
+                <spacer name="playlistTracksButtonsSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="addLocalTrackButton">
+                 <property name="text">
+                  <string>Add Local</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="removeLocalTrackButton">
+                 <property name="text">
+                  <string>Remove</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tabOnlineTracks">
+            <attribute name="title">
+             <string>Online library</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="onlineLayout">
+             <item>
+              <widget class="QLabel" name="onlineLabel">
+               <property name="text">
+                <string>Online tracks</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTableWidget" name="onlineTracksTable">
+               <property name="columnCount">
+                <number>3</number>
+               </property>
+               <column>
+                <property name="text">
+                 <string>Title</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Artist</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Duration</string>
+                </property>
+               </column>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="onlineButtonsLayout">
+               <item>
+                <spacer name="onlineButtonsSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="addOnlineTrackButton">
+                 <property name="text">
+                  <string>Add Online</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="removeOnlineTrackButton">
+                 <property name="text">
+                  <string>Remove</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="nowPlayingGroupBox">
+      <property name="title">
+       <string>Now Playing</string>
+      </property>
+      <layout class="QVBoxLayout" name="bottomLayout">
+       <item>
+        <widget class="QLabel" name="currentTrackLabel">
+         <property name="text">
+          <string>No track</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="controlsLayout">
+         <item>
+          <widget class="QPushButton" name="prevButton">
+           <property name="text">
+            <string>Previous</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="playButton">
+           <property name="text">
+            <string>Play</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pauseButton">
+           <property name="text">
+            <string>Pause</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="nextButton">
+           <property name="text">
+            <string>Next</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="positionLayout">
+           <item>
+            <widget class="QSlider" name="positionSlider">
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="positionTimeLabel">
+             <property name="text">
+              <string>00:00 / 00:00</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="volumeLayout">
+           <item>
+            <widget class="QSlider" name="volumeSlider">
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="volumeLabel">
+             <property name="text">
+              <string>Volume: 50%</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
